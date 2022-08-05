@@ -1,3 +1,4 @@
+import os
 import torch
 import torchvision
 from torchvision import datasets, models, transforms
