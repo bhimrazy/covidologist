@@ -1,5 +1,6 @@
 import os
 import time
+import json
 import copy
 import torch
 from tqdm import tqdm
@@ -79,7 +80,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
     print("Writing logs....")
     with open(LOGS_FILE_NAME, "w+") as f:
-        f.write(str(logs))
+        f.write(json.dumps(logs))
 
     # load best model weights
     model.load_state_dict(best_model_wts)
