@@ -62,7 +62,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
             log = f'{phase} Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}'
             logs[phase]["loss"].append(epoch_loss)
-            logs[phase]["acc"].append(epoch_acc)
+            logs[phase]["acc"].append(epoch_acc.detach().cpu().item())
             print(log)
 
             # deep copy the model
@@ -79,7 +79,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
     print("Writing logs....")
     with open(LOGS_FILE_NAME, "w+") as f:
-        f.write(str(logs))
+        f.write(json.dumps(logs))
 
     # load best model weights
     model.load_state_dict(best_model_wts)
@@ -90,7 +90,7 @@ def train_and_save_model():
     """This function trains and saves model
     """
     model_conv = train_model(model, criterion, optimizer,
-                             exp_lr_scheduler, num_epochs=2)
+                             exp_lr_scheduler, num_epochs=1)
 
     save_checkpoint(state=model_conv.state_dict())
     save_onnx_model(model=model_conv)
