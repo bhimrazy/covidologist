@@ -51,3 +51,6 @@ Run my Project
 
 ## Author
 - [@bhimrazy](https://www.github.com/bhimrazy)
+
+## Preview
+[![covid 19 disease detection](https://user-images.githubusercontent.com/46085301/183138564-bdaaa457-5f31-47e5-889d-f7331a8ffebb.png)](https://covidologist.herokuapp.com/)
