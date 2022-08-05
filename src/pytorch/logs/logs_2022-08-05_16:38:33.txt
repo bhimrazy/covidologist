@@ -1,0 +1,1 @@
+['train Loss: 0.4934 Acc: 0.8440', 'val Loss: 0.3522 Acc: 0.9645', 'train Loss: 0.4229 Acc: 0.8870', 'val Loss: 0.3473 Acc: 0.9665', 'train Loss: 0.4150 Acc: 0.8951', 'val Loss: 0.3438 Acc: 0.9710', 'train Loss: 0.4111 Acc: 0.8981', 'val Loss: 0.3394 Acc: 0.9740', 'train Loss: 0.4125 Acc: 0.8945', 'val Loss: 0.3393 Acc: 0.9740']
