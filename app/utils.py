@@ -40,23 +40,25 @@ def get_prediction(image_bytes):
     ort_outs = ort_session.run(None, ort_inputs)
     img_out = ort_outs[0]
     predicted_idx = np.argmax(img_out[0])
-    return class_names[predicted_idx]
+    confidence = round(img_out[0][predicted_idx]*100, 2)
+    return class_names[predicted_idx], confidence
 
 
 def get_result(image_file, is_api=False):
     start_time = datetime.datetime.now()
     image_bytes = image_file.file.read()
-    class_name = get_prediction(image_bytes)
-    end_time = datetime.datetime.now()
-    time_diff = (end_time - start_time)
-    execution_time = f'{round(time_diff.total_seconds() * 1000)} ms'
+    class_name, confidence = get_prediction(image_bytes)
     encoded_string = base64.b64encode(image_bytes)
     bs64 = encoded_string.decode('utf-8')
     image_data = f'data:image/jpeg;base64,{bs64}'
+    end_time = datetime.datetime.now()
+    time_diff = (end_time - start_time)
+    execution_time = f'{round(time_diff.total_seconds() * 1000)} ms'
     result = {
         "inference_time": execution_time,
         "predictions": {
-            "class_name": class_name
+            "class_name": class_name,
+            "confidence": confidence
         }
     }
     if not is_api:
