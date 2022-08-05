@@ -91,7 +91,7 @@ def train_and_save_model():
     """This function trains and saves model
     """
     model_conv = train_model(model, criterion, optimizer,
-                             exp_lr_scheduler, num_epochs=1)
+                             exp_lr_scheduler, num_epochs=12)
 
     save_checkpoint(state=model_conv.state_dict())
     save_onnx_model(model=model_conv)
