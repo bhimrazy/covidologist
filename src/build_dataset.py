@@ -85,7 +85,8 @@ def map_dir(folder: str):
         for file in val_files:
             file["src_path"] = file["src_path"].replace("train", "val")
             file["dest_path"] = file["dest_path"].replace("train", "val")
-        move_files(files=train_files+val_files)
+        move_files(files=train_files)
+        move_files(files=val_files)
 
     else:
         move_files(files=files)
