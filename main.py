@@ -4,7 +4,7 @@ from src.pytorch.train import train_and_save_model
 
 
 def main():
-    prepare_dataset()
+    # prepare_dataset()
     # datasets
     # print(image_datasets)
     # train model
