@@ -10,9 +10,8 @@ from PIL import Image
 import json
 
 # model
-
-
-ort_session = onnxruntime.InferenceSession("ome.onnx")
+MODEL_PATH = "2022-08-05_19:32:12_model.onnx"
+ort_session = onnxruntime.InferenceSession(MODEL_PATH)
 
 
 def to_numpy(tensor):
@@ -24,13 +23,14 @@ class_names = ['negative', 'positive']
 
 
 def transform_image(image_bytes):
-    my_transforms = transforms.Compose([transforms.Resize(255),
-                                        transforms.CenterCrop(224),
-                                        transforms.ToTensor(),
-                                        transforms.Normalize(
-                                            [0.485, 0.456, 0.406],
-                                            [0.229, 0.224, 0.225])])
-    image = Image.open(io.BytesIO(image_bytes))
+    my_transforms = transforms.Compose([
+        transforms.Resize(255),
+        transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize(
+            [0.485, 0.456, 0.406],
+            [0.229, 0.224, 0.225])])
+    image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
     return my_transforms(image).unsqueeze(0)
 
 

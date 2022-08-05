@@ -24,7 +24,8 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://academy-bhimraj-com-np.vercel.app">
     <meta property="twitter:title" content="Otitis Media Detection App using FastAPI and PyTorch | By Bhimraj Yadav">
-    <meta property="twitter:description" content="Otitis Media Detection App using FastAPI and PyTorch | By Bhimraj Yadav">
+    <meta property="twitter:description"
+        content="Otitis Media Detection App using FastAPI and PyTorch | By Bhimraj Yadav">
     <meta property="twitter:image" content="https://fastapi-pytorch-app.herokuapp.com/static/images/landing-page.png">
     <link rel="canonical" href="/">
     <link rel="icon" type="image/png" href="{{ url_for('static', path='/icons/icon.png') }}" />
@@ -87,7 +88,7 @@
                     <img class="h-48 w-auto rounded shadow-sm" src='{{result.image_data}}' alt="{{result.filename}}" />
                     {% endif %}
                     <div class="text-center">
-                        <p class="text-gray-600 font-semibold text-center capitalize">Result: {{
+                        <p class="text-gray-600 font-semibold text-center capitalize">Result: COVID {{
                             result.predictions.class_name }}
                         </p>
                         <small class="text-gray-600 text-base">Inference Time:{{result.inference_time}}</small>

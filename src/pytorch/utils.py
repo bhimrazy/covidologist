@@ -2,7 +2,7 @@ import os
 import torch
 from collections import OrderedDict
 from src.pytorch.model import DenseNet121
-from src.pytorch.config import ARTIFACTS_DIR, PYTORCH_FILE_NAME, ONNX_FILE_NAME
+from src.pytorch.config import ARTIFACTS_DIR, PYTORCH_FILE_NAME, ONNX_FILE_NAME, DEVICE
 
 
 def save_onnx_model(model, filename=ONNX_FILE_NAME):
@@ -47,5 +47,5 @@ def load_checkpoint(checkpoint: str):
     print("=> Loading checkpoint")
     model = DenseNet121(out_size=2)
     checkpoint_path = os.path.join(ARTIFACTS_DIR, checkpoint)
-    model.load_state_dict(torch.load(checkpoint_path))
+    model.load_state_dict(torch.load(checkpoint_path, map_location=DEVICE))
     return model
