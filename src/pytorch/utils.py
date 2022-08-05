@@ -1,5 +1,6 @@
 import os
 import torch
+from src.pytorch.model import DenseNet121
 from collections import OrderedDict
 from src.pytorch.config import ARTIFACTS_DIR, PYTORCH_FILE_NAME, ONNX_FILE_NAME
 
@@ -43,9 +44,9 @@ def save_checkpoint(state: OrderedDict, filename=PYTORCH_FILE_NAME):
     torch.save(state, dest_path)
 
 
-def load_checkpoint(checkpoint, model, optimizer):
+def load_checkpoint(checkpoint):
     print("=> Loading checkpoint")
-    model.load_state_dict(checkpoint["state_dict"])
-    optimizer.load_state_dict(checkpoint["optimizer"])
-    step = checkpoint["step"]
-    return step
+    model = DenseNet121(out_size=2)
+    checkpoint_path = os.path.join(ARTIFACTS_DIR, checkpoint)
+    model.load_state_dict(torch.load(checkpoint_path))
+    return model
