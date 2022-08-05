@@ -1,6 +1,5 @@
 import os
 import time
-import json
 import copy
 import torch
 from tqdm import tqdm
@@ -80,7 +79,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
 
     print("Writing logs....")
     with open(LOGS_FILE_NAME, "w+") as f:
-        f.write(json.dumps(logs))
+        f.write(str(logs))
 
     # load best model weights
     model.load_state_dict(best_model_wts)
@@ -91,6 +90,6 @@ def train_and_save_model():
     """This function trains and saves model
     """
     model_conv = train_model(model, criterion, optimizer,
-                             exp_lr_scheduler, num_epochs=5)
+                             exp_lr_scheduler, num_epochs=2)
 
     save_checkpoint(state=model_conv.state_dict())
