@@ -9,7 +9,7 @@ def save_onnx_model(model, filename=ONNX_FILE_NAME):
     """This function saves pytorch model as a onnx model
 
     Args:
-        state (OrderedDict): model 
+        model: model to be saved
         filename (str, optional): Model checkpoint file name. Defaults to ONNX_FILE_NAME.
     """
     print("=> Saving ONNX model checkpoint...")
