@@ -1,10 +1,53 @@
-# project-noname
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/46085301/183135654-42cb6a4b-bf27-4e10-b2de-e6be196b2b96.png" height="150"/>
+  <br/>
+A Disease Detection Web App to assist radiologists to detect the presence of COVID-19.
+</P>
 
-# Setup kaggle key
+## Installation
+Run my Project
+```shell
+    # clone the repo and check into the dir
+    git clone https://github.com/bhimrazy/covidologist
+    cd covidologist
+    
+    # Setup environment and install all the requirements
+    python -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+    
+    # Setup kaggle key or download kaggle.json key file and place it in "~/.kaggle"
+    export KAGGLE_USERNAME="your kaggle username"
+    export KAGGLE_KEY="your kaggle api key"
 
-export KAGGLE_USERNAME="bhimrajyadav"
-export KAGGLE_KEY="299021819e70d2bf4ba8a19c699583ea"
+    # Download Datasets from kaggle (https://www.kaggle.com/datasets/andyczhao/covidx-cxr2)
+    kaggle datasets download -d andyczhao/covidx-cxr2
+    
+    # unzip to temp folder
+    unzip covidx-cxr2.zip -d temp
+    
+    # remove zip file
+    rm -rf covidx-cxr2.zip
+    
+    
+    # prepare dataset folder
+    python main.py prepare
+    
+    # train model
+    python main.py train
+    
+    # generate metrics
+    python main.py generate
+    
+    
+    # Run fast api app
+    cd app && uvicorn main:app --reload
+```
 
-# Download Datasets from kaggle
-kaggle datasets download -d [DATASET]
-kaggle datasets download -d andyczhao/covidx-cxr2
+## 📚 RESOURCES:
+◆ PyTorch: https://pytorch.org <br/>
+◆ FastAPI: https://fastapi.tiangolo.com <br/>
+◆ COVIDx CXR-2 Dataset: https://www.kaggle.com/datasets/andyczhao/covidx-cxr2
+
+## Author
+- [@bhimrazy](https://www.github.com/bhimrazy)
