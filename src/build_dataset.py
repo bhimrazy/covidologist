@@ -6,6 +6,7 @@ import os
 import glob
 import shutil
 import random
+import pandas as pd
 from tqdm import tqdm
 from pathlib import Path
 from multiprocessing import Pool, cpu_count
@@ -65,8 +66,8 @@ def map_dir(folder: str):
     Args:
         folder (str): Folder Name to which all the files will be mapped 
     """
+    files = []
     with open(f'{TEMP_FOLDER_PATH}/{folder}.txt') as file:
-        files = []
         for i, line in enumerate(file):
             s_line = line.split()
             file_name = f'cxr_{i}.png'
@@ -75,6 +76,18 @@ def map_dir(folder: str):
                 "dest_path": os.path.join(DATASET_FOLDER_PATH, folder, s_line[2], file_name),
                 "class": s_line[2]
             })
+    if folder == "train":
+        positives = [f for f in files if f['class'] == "positive"]
+        negatives = [f for f in files if f['class'] == "negative"]
+
+        train_files = positives[:5000] + negatives[:5000]
+        val_files = positives[5000:6000] + negatives[5000:6000]
+        for file in val_files:
+            file["src_path"] = file["src_path"].replace("train", "val")
+            file["dest_path"] = file["dest_path"].replace("train", "val")
+        move_files(files=train_files+val_files)
+
+    else:
         move_files(files=files)
 
 
