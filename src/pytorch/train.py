@@ -4,7 +4,7 @@ import json
 import copy
 import torch
 from tqdm import tqdm
-from src.pytorch.utils import save_checkpoint
+from src.pytorch.utils import save_checkpoint, save_onnx_model
 from src.pytorch.dataloader import dataloaders, dataset_sizes
 from src.pytorch.config import LOGS_FILE_NAME, DEVICE
 from src.pytorch.model import model, criterion, optimizer, exp_lr_scheduler
@@ -94,3 +94,4 @@ def train_and_save_model():
                              exp_lr_scheduler, num_epochs=5)
 
     save_checkpoint(state=model_conv.state_dict())
+    save_onnx_model(model=momodel_conv)
