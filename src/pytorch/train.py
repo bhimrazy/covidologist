@@ -93,4 +93,4 @@ def train_and_save_model():
                              exp_lr_scheduler, num_epochs=2)
 
     save_checkpoint(state=model_conv.state_dict())
-    save_onnx_model(model=momodel_conv)
+    save_onnx_model(model=model_conv)
