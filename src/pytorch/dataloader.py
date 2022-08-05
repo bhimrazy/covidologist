@@ -1,6 +1,7 @@
 import torch
 import torchvision
 from torchvision import datasets, models, transforms
+from .config import DATASET_FOLDER_PATH
 
 data_transforms = {
     'train': transforms.Compose([
@@ -25,7 +26,7 @@ data_transforms = {
     ]),
 }
 
-data_dir = 'datasets'
+data_dir = DATASET_FOLDER_PATH
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                           data_transforms[x])
                   for x in ['train', 'test']}
