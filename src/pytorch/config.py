@@ -26,6 +26,5 @@ PYTORCH_FILE_NAME = datetime.now(tz=pytz.timezone(
     'Asia/kathmandu')).strftime('%Y-%m-%d_%H:%M:%S_model.pth.tar')
 ONNX_FILE_NAME = datetime.now(tz=pytz.timezone(
     'Asia/kathmandu')).strftime('%Y-%m-%d_%H:%M:%S_model.onnx')
-LOGS_FILE_NAME = datetime.now(tz=pytz.timezone(
-    'Asia/kathmandu')).strftime('logs_%Y-%m-%d_%H:%M:%S.txt')
-
+LOGS_FILE_NAME = os.path.join(ARTIFACTS_DIR, "logs", datetime.now(tz=pytz.timezone(
+    'Asia/kathmandu')).strftime('logs_%Y-%m-%d_%H:%M:%S.txt'))
