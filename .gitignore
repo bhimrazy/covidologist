@@ -132,7 +132,7 @@ src/dataset/**/*.png
 src/dataset/**/*.jpg
 
 # Model files
-*.onnx
+# *.onnx
 *.pt 
 *.pth
 *.zip
