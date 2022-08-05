@@ -83,7 +83,6 @@ def map_dir(folder: str):
         train_files = positives[:5000] + negatives[:5000]
         val_files = positives[5000:6000] + negatives[5000:6000]
         for file in val_files:
-            file["src_path"] = file["src_path"].replace("train", "val")
             file["dest_path"] = file["dest_path"].replace("train", "val")
         move_files(files=train_files)
         move_files(files=val_files)
