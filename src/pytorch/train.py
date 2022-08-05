@@ -22,7 +22,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
         print('-' * 10)
 
         # Each epoch has a training and validation phase
-        for phase in ['train', 'test']:
+        for phase in ['train', 'val']:
             if phase == 'train':
                 model.train()  # Set model to training mode
             else:
@@ -65,7 +65,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
             print(log)
 
             # deep copy the model
-            if phase == 'test' and epoch_acc > best_acc:
+            if phase == 'val' and epoch_acc > best_acc:
                 best_acc = epoch_acc
                 best_model_wts = copy.deepcopy(model.state_dict())
 
@@ -74,7 +74,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
     time_elapsed = time.time() - since
     print(
         f'Training complete in {time_elapsed // 60:.0f}m {time_elapsed % 60:.0f}s')
-    print(f'Best test Acc: {best_acc:4f}')
+    print(f'Best val Acc: {best_acc:4f}')
 
     print("Writing logs....")
     with open(LOGS_FILE_NAME, "w+") as f:
