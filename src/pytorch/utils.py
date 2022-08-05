@@ -14,7 +14,6 @@ def save_onnx_model(model, filename=ONNX_FILE_NAME):
     """
     print("=> Saving ONNX model checkpoint...")
     dest_path = os.path.join(ARTIFACTS_DIR, ONNX_FILE_NAME)
-    torch.save(state, dest_path)
     # onnx export
     onnx_model = model.cpu()
     # Input to the model
