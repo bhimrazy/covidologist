@@ -9,6 +9,6 @@ from pathlib import Path
 import torch
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATASET_FOLDER_PATH = os.path.join(BASE_DIR, "src/dataset")
+DATASET_FOLDER_PATH = os.path.join(BASE_DIR, "dataset")
 
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
