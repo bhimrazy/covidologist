@@ -9,15 +9,19 @@ from torchvision import models
 from PIL import Image
 import json
 
-# model 
+# model
 
 
 ort_session = onnxruntime.InferenceSession("ome.onnx")
+
+
 def to_numpy(tensor):
     return tensor.detach().cpu().numpy() if tensor.requires_grad else tensor.cpu().numpy()
 
+
 # classes
-class_names = ['normal', 'presence of otits media']
+class_names = ['negative', 'positive']
+
 
 def transform_image(image_bytes):
     my_transforms = transforms.Compose([transforms.Resize(255),
@@ -39,7 +43,7 @@ def get_prediction(image_bytes):
     return class_names[predicted_idx]
 
 
-def get_result(image_file,is_api = False):
+def get_result(image_file, is_api=False):
     start_time = datetime.datetime.now()
     image_bytes = image_file.file.read()
     class_name = get_prediction(image_bytes)
@@ -48,13 +52,13 @@ def get_result(image_file,is_api = False):
     execution_time = f'{round(time_diff.total_seconds() * 1000)} ms'
     encoded_string = base64.b64encode(image_bytes)
     bs64 = encoded_string.decode('utf-8')
-    image_data = f'data:image/jpeg;base64,{bs64}'   
+    image_data = f'data:image/jpeg;base64,{bs64}'
     result = {
-        "inference_time":execution_time,
-        "predictions":{
-            "class_name":class_name
+        "inference_time": execution_time,
+        "predictions": {
+            "class_name": class_name
         }
     }
-    if not is_api: 
-        result["image_data"]= image_data
+    if not is_api:
+        result["image_data"] = image_data
     return result

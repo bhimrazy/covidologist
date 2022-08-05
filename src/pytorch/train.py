@@ -15,7 +15,7 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
 
-    logs = []
+    logs = {"train": {"loss": [], "acc": []}, "val": {"loss": [], "acc": []}}
 
     for epoch in tqdm(range(num_epochs), "Training..."):
         print(f'Epoch {epoch}/{num_epochs - 1}')
@@ -61,7 +61,8 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
             epoch_acc = running_corrects.double() / dataset_sizes[phase]
 
             log = f'{phase} Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}'
-            logs.append(log)
+            logs[phase]["loss"].append(epoch_loss)
+            logs[phase]["acc"].append(epoch_acc)
             print(log)
 
             # deep copy the model
