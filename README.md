@@ -46,7 +46,7 @@ Run my Project
     python main.py train
     
     # generate metrics
-    python main.py generate
+    # python main.py generate
     
     
     # Run fast api app
